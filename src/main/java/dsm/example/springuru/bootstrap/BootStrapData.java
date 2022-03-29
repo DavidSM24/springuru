@@ -2,9 +2,11 @@ package dsm.example.springuru.bootstrap;
 
 import dsm.example.springuru.domain.Author;
 import dsm.example.springuru.domain.Book;
+import dsm.example.springuru.domain.Hero;
 import dsm.example.springuru.domain.Publisher;
 import dsm.example.springuru.repositories.AuthorRepository;
 import dsm.example.springuru.repositories.BookRepository;
+import dsm.example.springuru.repositories.HeroRepository;
 import dsm.example.springuru.repositories.PublisherRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -18,11 +20,13 @@ public class BootStrapData implements CommandLineRunner {
     private final AuthorRepository authorRepository;
     private final BookRepository bookRepository;
     private final PublisherRepository publisherRepository;
+    private final HeroRepository heroRepository;
 
-    public BootStrapData(AuthorRepository authorRepository, BookRepository bookRepository, PublisherRepository publisherRepository) {
+    public BootStrapData(AuthorRepository authorRepository, BookRepository bookRepository, PublisherRepository publisherRepository, HeroRepository heroRepository) {
         this.authorRepository = authorRepository;
         this.bookRepository = bookRepository;
         this.publisherRepository = publisherRepository;
+        this.heroRepository = heroRepository;
     }
 
     @Override
@@ -65,5 +69,14 @@ public class BootStrapData implements CommandLineRunner {
 
         System.out.println("Number of Books: " + bookRepository.count());
         System.out.println("Publisher Number of Books: " + publisher.getBooks().size());
+
+        System.out.println("-----------------------------------------------------------");
+
+        Hero batman= new Hero("Superman");
+
+        heroRepository.save(batman);
+
+        System.out.println(heroRepository.findAll());
+
     }
 }
