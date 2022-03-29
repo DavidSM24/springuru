@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -17,5 +19,17 @@ public class HeroService {
     public List<Hero> getAll() {
 
         return repository.findAll();
+    }
+
+    public Hero getById(Long id){
+
+        Optional<Hero> h=repository.findById(id);
+        return h.orElse(null);
+
+    }
+
+
+    public List<Hero> getByName(String name){
+        return repository.getByName(name.toLowerCase());
     }
 }
