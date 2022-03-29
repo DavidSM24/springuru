@@ -72,11 +72,12 @@ public class BootStrapData implements CommandLineRunner {
 
         System.out.println("-----------------------------------------------------------");
 
-        Hero batman= new Hero("Superman");
+        Hero batman= new Hero("Batman");
+        Hero superman= new Hero("Superman");
 
         heroRepository.save(batman);
-
-        System.out.println(heroRepository.findAll());
+        heroRepository.save(superman);
+        //System.out.println(heroRepository.findById(455L));
 
     }
 }
