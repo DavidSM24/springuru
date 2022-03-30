@@ -32,6 +32,18 @@ public class HeroService {
         return repository.getByName(name.toLowerCase());
     }
 
+    public Hero add(Hero hero){
+        if(hero!=null&&hero.getId()!=null){
+            return update(hero);
+        }
+        else{
+            if(hero!=null&&hero.getName()!=null&&hero.getName().length()>0){
+                return repository.save(hero);
+            }
+        }
+        return null;
+    }
+
     public Hero update(Hero hero){
         if(hero!=null&&hero.getId()!=null
         &&hero.getName()!=null&&(!hero.getName().equals(""))){
