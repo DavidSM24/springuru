@@ -28,9 +28,24 @@ public class HeroService {
 
     }
 
-
     public List<Hero> getByName(String name){
         return repository.getByName(name.toLowerCase());
+    }
+
+    public Hero update(Hero hero){
+        if(hero!=null&&hero.getId()!=null
+        &&hero.getName()!=null&&(!hero.getName().equals(""))){
+            Optional<Hero> h = repository.findById(hero.getId());
+            if(h.isPresent()){
+                Hero newHero=h.get();
+                newHero.setId(hero.getId());
+                newHero.setName(hero.getName());
+                newHero=repository.save(newHero);
+
+                return newHero;
+            }
+        }
+        return null;
     }
 
     public boolean deleteById(Long id){
