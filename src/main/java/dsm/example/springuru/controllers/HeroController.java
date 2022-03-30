@@ -8,14 +8,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @CrossOrigin(origins = "*")
+@RequestMapping("/heroes")
 @Controller
 public class HeroController {
 
@@ -26,7 +24,7 @@ public class HeroController {
         this.heroService = heroService;
     }
 
-    @GetMapping("/heroes")
+    @GetMapping()
     public ResponseEntity<List<Hero>> getHeroes(){
 
         List<Hero> all=heroService.getAll();
@@ -34,7 +32,7 @@ public class HeroController {
 
     }
 
-    @GetMapping("/heroes/id/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity getById(@PathVariable("id") Long id){
 
         Hero result=heroService.getById(id);
@@ -42,7 +40,7 @@ public class HeroController {
         else return new ResponseEntity("No se ha encontrado un héroe con ese id.",new HttpHeaders(), HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/heroes/name/{name}")
+    @GetMapping("/name/{name}")
     public ResponseEntity<List<Hero>> getByName(@PathVariable("name") String name){
 
         List<Hero> all=heroService.getByName(name);
@@ -50,4 +48,17 @@ public class HeroController {
 
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteById(@PathVariable("id") Long id){
+
+        String result;
+        boolean deleted=heroService.deleteById(id);
+        result="El héroe se ha eliminado correctamente.";
+        if(deleted){
+            return new ResponseEntity("El héroe se ha eliminado correctamente.",new HttpHeaders(), HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity("Ha ocurrido un error, su id puede no ser válido.",new HttpHeaders(), HttpStatus.NOT_FOUND);
+        }
+    }
 }

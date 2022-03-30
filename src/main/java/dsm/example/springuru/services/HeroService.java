@@ -32,4 +32,15 @@ public class HeroService {
     public List<Hero> getByName(String name){
         return repository.getByName(name.toLowerCase());
     }
+
+    public boolean deleteById(Long id){
+        try {
+            repository.deleteById(id);
+            return true;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
