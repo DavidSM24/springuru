@@ -49,6 +49,13 @@ public class HeroController {
 
     }
 
+    @PostMapping()
+    public ResponseEntity add(@Validated @RequestBody Hero hero){
+        Hero newHero=heroService.add(hero);
+        if(newHero!=null) return new ResponseEntity<Hero>(newHero,new HttpHeaders(), HttpStatus.OK);
+        else return new ResponseEntity("Error al insertar, no todos los campos son correctos.",new HttpHeaders(),HttpStatus.BAD_REQUEST);
+    }
+
     @PutMapping()
     public ResponseEntity update(@Validated @RequestBody Hero hero){
         Hero newHero=heroService.update(hero);
