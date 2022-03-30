@@ -32,6 +32,7 @@ public class BootStrapData implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
+        /*
         System.out.println("Started in Bootstrap");
 
         Publisher publisher = new Publisher();
@@ -87,6 +88,6 @@ public class BootStrapData implements CommandLineRunner {
         heroRepository.save(h123);
         heroRepository.save(h333);
         //System.out.println(heroRepository.findById(455L));
-
+*/
     }
 }
