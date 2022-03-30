@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -45,6 +46,14 @@ public class HeroController {
 
         List<Hero> all=heroService.getByName(name);
         return new ResponseEntity<List<Hero>>(all,new HttpHeaders(), HttpStatus.OK);
+
+    }
+
+    @PutMapping()
+    public ResponseEntity update(@Validated @RequestBody Hero hero){
+        Hero newHero=heroService.update(hero);
+        if(newHero!=null) return new ResponseEntity<Hero>(newHero,new HttpHeaders(), HttpStatus.OK);
+        else return new ResponseEntity("O el id no es válido o algún campo contiene errores.",new HttpHeaders(), HttpStatus.BAD_REQUEST);
 
     }
 
