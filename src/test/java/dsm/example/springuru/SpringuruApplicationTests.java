@@ -1,13 +1,10 @@
 package dsm.example.springuru;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+import org.junit.Test;
+
+
 class SpringuruApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
 
 }
