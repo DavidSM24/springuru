@@ -2,6 +2,9 @@ package dsm.example.springuru.controllers;
 
 import dsm.example.springuru.domain.Hero;
 import dsm.example.springuru.services.HeroService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -25,6 +28,14 @@ public class HeroController {
         this.heroService = heroService;
     }
 
+
+    @ApiOperation(value = "Return all heroes", notes="Return a Hero List")
+    @ApiResponses(value = {
+            @ApiResponse(code=200,message="Successful Operation"),
+            @ApiResponse(code=400,message="Bad Request"),
+            @ApiResponse(code=404,message="ERROR, Can't get Agencies"),
+            @ApiResponse(code=500,message="Internal Error"),
+    })
     @GetMapping()
     public ResponseEntity<List<Hero>> getHeroes(){
 
@@ -33,6 +44,13 @@ public class HeroController {
 
     }
 
+    @ApiOperation(value = "Return an hero by id", notes="Return a Hero filter by id.")
+    @ApiResponses(value = {
+            @ApiResponse(code=200,message="Successful Operation"),
+            @ApiResponse(code=400,message="Bad Request"),
+            @ApiResponse(code=404,message="ERROR, Can't get Agencies"),
+            @ApiResponse(code=500,message="Internal Error"),
+    })
     @GetMapping("/id/{id}")
     public ResponseEntity getById(@PathVariable("id") Long id){
 

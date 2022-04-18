@@ -4,10 +4,13 @@ import dsm.example.springuru.repositories.BookRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import springfox.documentation.annotations.ApiIgnore;
 
 /**
  * Created by jt on 12/24/19.
  */
+
+@ApiIgnore
 @Controller
 public class BookController {
 
